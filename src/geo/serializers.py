@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from geo.models import Country, City, CurrencyRate
+from geo.models import Country, City, CurrencyRate, Weather
 
 
 class CountrySerializer(serializers.ModelSerializer):
@@ -60,4 +59,23 @@ class CurrencySerializer(serializers.ModelSerializer):
             "compared_to",
             "value",
             "date",
+        ]
+
+
+class WeatherSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для данных о погоде.
+    """
+
+    class Meta:
+        model = Weather
+        fields = [
+            "id",
+            "country",
+            "city",
+            "temp",
+            "pressure",
+            "humidity",
+            "wind_speed",
+            "description",
         ]

@@ -173,6 +173,8 @@ class WeatherInfoDTO(BaseModel):
     .. code-block::
 
         WeatherInfoDTO(
+            country="RU"
+            city="Perm"
             temp=13.92,
             pressure=1023,
             humidity=54,
@@ -180,7 +182,8 @@ class WeatherInfoDTO(BaseModel):
             description="scattered clouds",
         )
     """
-
+    country: str
+    city: str
     temp: float
     pressure: int
     humidity: int
