@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from base.models import TimeStampMixin
+from datetime import date
 
 
 class Country(TimeStampMixin):
@@ -96,3 +97,28 @@ class City(TimeStampMixin):
         verbose_name = "Город"
         verbose_name_plural = "Города"
         ordering = ["name"]
+
+class CurrencyRate(TimeStampMixin):
+    """Модель курса валюты"""
+
+    base = models.CharField(
+        max_length=3,
+        verbose_name="Валюта",
+    )
+
+    compared_to = models.CharField(
+        max_length=3,
+        verbose_name="Валюта для сравнения",
+    )
+
+    value = models.FloatField(
+        verbose_name="Курс",
+    )
+    date = models.DateTimeField(
+        verbose_name="Дата",
+        default=date.today(),
+    )
+
+    class Meta:
+        verbose_name = "Курс"
+        verbose_name_plural = "Курсы"
