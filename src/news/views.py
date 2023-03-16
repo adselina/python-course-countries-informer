@@ -16,11 +16,11 @@ paginator = pagination()
 @api_view(["GET"])
 def get_country_news(request: Request, alpha2code: str) -> JsonResponse:
     """
-   Получение новостей страны.
-   :param Request request: Объект запроса
-   :param str alpha2code: ISO Alpha2 код страны
-   :return:
-   """
+    Получение новостей страны.
+    :param Request request: Объект запроса
+    :param str alpha2code: ISO Alpha2 код страны
+    :return:
+    """
     news = caches[CACHE_NEWS].get(alpha2code)
     if not news:
         if news := NewsService().get_news(alpha2code):

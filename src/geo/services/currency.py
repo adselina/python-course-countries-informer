@@ -1,4 +1,3 @@
-
 from django.db.models import Q, QuerySet
 
 from geo.clients.currency import CurrencyClient

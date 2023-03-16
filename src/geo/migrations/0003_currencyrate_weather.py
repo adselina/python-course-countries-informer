@@ -7,43 +7,95 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('geo', '0002_alter_city_region'),
+        ("geo", "0002_alter_city_region"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CurrencyRate',
+            name="CurrencyRate",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Время создания записи')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Время обновления записи')),
-                ('base', models.CharField(max_length=3, verbose_name='Валюта')),
-                ('compared_to', models.CharField(max_length=3, verbose_name='Валюта для сравнения')),
-                ('value', models.FloatField(verbose_name='Курс')),
-                ('date', models.DateTimeField(default=datetime.date(2023, 3, 16), verbose_name='Дата')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Время создания записи"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Время обновления записи"
+                    ),
+                ),
+                ("base", models.CharField(max_length=3, verbose_name="Валюта")),
+                (
+                    "compared_to",
+                    models.CharField(max_length=3, verbose_name="Валюта для сравнения"),
+                ),
+                ("value", models.FloatField(verbose_name="Курс")),
+                (
+                    "date",
+                    models.DateTimeField(
+                        default=datetime.date(2023, 3, 16), verbose_name="Дата"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Курс',
-                'verbose_name_plural': 'Курсы',
+                "verbose_name": "Курс",
+                "verbose_name_plural": "Курсы",
             },
         ),
         migrations.CreateModel(
-            name='Weather',
+            name="Weather",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Время создания записи')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Время обновления записи')),
-                ('country', models.CharField(max_length=2, verbose_name='ISO Alpha2 код страны')),
-                ('city', models.CharField(max_length=100, verbose_name='Город')),
-                ('temp', models.FloatField(verbose_name='Температура')),
-                ('pressure', models.IntegerField(verbose_name='Давление')),
-                ('humidity', models.IntegerField(verbose_name='Влажность')),
-                ('wind_speed', models.FloatField(verbose_name='Скорость ветра')),
-                ('description', models.CharField(max_length=100, verbose_name='Описание')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Время создания записи"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Время обновления записи"
+                    ),
+                ),
+                (
+                    "country",
+                    models.CharField(
+                        max_length=2, verbose_name="ISO Alpha2 код страны"
+                    ),
+                ),
+                ("city", models.CharField(max_length=100, verbose_name="Город")),
+                ("temp", models.FloatField(verbose_name="Температура")),
+                ("pressure", models.IntegerField(verbose_name="Давление")),
+                ("humidity", models.IntegerField(verbose_name="Влажность")),
+                ("wind_speed", models.FloatField(verbose_name="Скорость ветра")),
+                (
+                    "description",
+                    models.CharField(max_length=100, verbose_name="Описание"),
+                ),
             ],
             options={
-                'verbose_name': 'Погода',
-                'verbose_name_plural': 'Погода',
+                "verbose_name": "Погода",
+                "verbose_name_plural": "Погода",
             },
         ),
     ]

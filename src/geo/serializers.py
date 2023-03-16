@@ -47,6 +47,7 @@ class CitySerializer(serializers.ModelSerializer):
             "country",
         ]
 
+
 class CurrencySerializer(serializers.ModelSerializer):
     """
     Сериализатор для данных о курсе валют.

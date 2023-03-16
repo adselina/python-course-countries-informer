@@ -19,12 +19,16 @@ class WeatherService:
         :return:
         """
 
-        weather = Weather.objects.filter(Q(country__iregex=alpha2code) | Q(city__iregex=city))
+        weather = Weather.objects.filter(
+            Q(country__iregex=alpha2code) | Q(city__iregex=city)
+        )
 
         if not weather:
             if data := WeatherClient().get_weather(f"{city},{alpha2code}"):
                 self.build_model(data)
-                weather = Weather.objects.filter(Q(country__iregex=alpha2code) | Q(city__iregex=city))
+                weather = Weather.objects.filter(
+                    Q(country__iregex=alpha2code) | Q(city__iregex=city)
+                )
 
         return weather
 

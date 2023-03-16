@@ -1,6 +1,5 @@
 """Представления Django"""
 import re
-from typing import Any
 
 from django.core.cache import caches
 from django.http import JsonResponse
@@ -9,7 +8,7 @@ from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.request import Request
 
 from app.settings import CACHE_WEATHER, CACHE_CURRENCY
-from geo.serializers import CountrySerializer, CitySerializer, CurrencySerializer, WeatherSerializer
+from geo.serializers import CitySerializer, CurrencySerializer, WeatherSerializer
 from geo.services.city import CityService
 from geo.services.country import CountryService
 from geo.services.shemas import CountryCityDTO
@@ -19,6 +18,7 @@ from rest_framework.settings import api_settings
 
 pagination = api_settings.DEFAULT_PAGINATION_CLASS
 paginator = pagination()
+
 
 @api_view(["GET"])
 def get_city(request: Request, name: str) -> JsonResponse:
@@ -165,7 +165,6 @@ def get_currency(request: Request, base: str) -> JsonResponse:
 
     if data:
         serializer = CurrencySerializer(data, many=True)
-
         return JsonResponse(serializer.data, safe=False)
 
     raise NotFound

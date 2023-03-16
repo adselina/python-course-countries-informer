@@ -182,6 +182,7 @@ class WeatherInfoDTO(BaseModel):
             description="scattered clouds",
         )
     """
+
     country: str
     city: str
     temp: float

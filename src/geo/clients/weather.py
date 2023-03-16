@@ -36,7 +36,9 @@ class WeatherClient(BaseClient):
         :return:
         """
 
-        if response := self._request(f"{self.get_base_url()}?units=metric&q={location}&appid={API_KEY_OPENWEATHER}"):
+        if response := self._request(
+            f"{self.get_base_url()}?units=metric&q={location}&appid={API_KEY_OPENWEATHER}"
+        ):
             return WeatherInfoDTO(
                 country=response["sys"]["country"],
                 city=response["name"],

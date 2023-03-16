@@ -8,6 +8,7 @@ class CountrySerializer(serializers.ModelSerializer):
     """
     Сериализатор для данных о стране.
     """
+
     class Meta:
         model = Country
         fields = [
@@ -20,6 +21,7 @@ class NewsSerializer(serializers.ModelSerializer):
     """
     Сериализатор для данных о новостях.
     """
+
     country = CountrySerializer(read_only=True)
 
     class Meta:

@@ -34,7 +34,7 @@ class NewsService:
 
         return None
 
-    def save_news(self, country_pk: int, news: list[NewsItemDTO]) -> None:
+    def save_news(self, country_pk: int, news: Optional[QuerySet[NewsItemDTO]]) -> None:
         """
         Сохранение новостей в базе данных.
 
@@ -65,6 +65,6 @@ class NewsService:
             author=news_item.author if news_item.author else "",
             title=news_item.title,
             description=news_item.description if news_item.description else "",
-            url=news_item.url if news_item.url else "",
+            url="",
             published_at=news_item.published_at,
         )
