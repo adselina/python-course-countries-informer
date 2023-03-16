@@ -1,10 +1,9 @@
-from typing import Type
-
 from django.core.cache import caches
 from rest_framework.decorators import api_view
-from rest_framework.exceptions import NotFound
+
 from rest_framework.request import Request
 from rest_framework.settings import api_settings
+from django.http import JsonResponse
 
 from app.settings import CACHE_NEWS
 from news.serializers import NewsSerializer
@@ -15,7 +14,7 @@ paginator = pagination()
 
 
 @api_view(["GET"])
-def get_country_news(request: Request, alpha2code: str) -> Type[NotFound]:
+def get_country_news(request: Request, alpha2code: str) -> JsonResponse:
     """
    Получение новостей страны.
    :param Request request: Объект запроса
@@ -33,4 +32,4 @@ def get_country_news(request: Request, alpha2code: str) -> Type[NotFound]:
 
         return paginator.get_paginated_response(serializer.data)
 
-    return NotFound
+    return JsonResponse([], safe=False)
