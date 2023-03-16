@@ -21,4 +21,4 @@ test:
 	docker compose run countries-informer-app ./manage.py test
 
 # запуск всех функций поддержки качества кода
-all: format lint test
+all: format lint

@@ -3,6 +3,8 @@ from typing import Optional
 from news.clients.news import NewsClient
 from news.clients.shemas import NewsItemDTO
 from news.models import News
+from django.db.models import Q, QuerySet
+from geo.models import Country
 
 
 class NewsService:
@@ -10,7 +12,7 @@ class NewsService:
     Сервис для работы с данными о новостях.
     """
 
-    def get_news(self, country_code: str) -> Optional[list[NewsItemDTO]]:
+    def get_news(self, country_code: str) -> Optional[QuerySet[NewsItemDTO]]:
         """
         Получение актуальных новостей по коду страны.
 
@@ -18,9 +20,21 @@ class NewsService:
         :return:
         """
 
-        return NewsClient().get_news(country_code)
+        country = Country.objects.get(Q(alpha2code__iregex=country_code))
 
-    def save_news(self, country_pk: int, news: list[NewsItemDTO]) -> None:
+        if country:
+            news = News.objects.filter(Q(country__id=country.pk))
+
+            if not news:
+                if data := NewsClient().get_news(country_code):
+                    self.save_news(country.pk, data)
+                    news = News.objects.filter(Q(country__id=country.pk))
+
+            return news
+
+        return None
+
+    def save_news(self, country_pk: int, news: Optional[QuerySet[NewsItemDTO]]) -> None:
         """
         Сохранение новостей в базе данных.
 
@@ -35,7 +49,8 @@ class NewsService:
                 batch_size=1000,
             )
 
-    def build_model(self, news_item: NewsItemDTO, country_id: int) -> News:
+    @staticmethod
+    def build_model(news_item: NewsItemDTO, country_id: int) -> News:
         """
         Формирование объекта модели новости.
 
@@ -50,6 +65,6 @@ class NewsService:
             author=news_item.author if news_item.author else "",
             title=news_item.title,
             description=news_item.description if news_item.description else "",
-            url=news_item.url if news_item.url else "",
+            url="",
             published_at=news_item.published_at,
         )
